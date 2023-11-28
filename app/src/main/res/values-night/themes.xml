@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Vio" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/rose</item>
+        <item name="colorPrimaryVariant">@color/atlantic</item>
+        <item name="colorOnPrimary">@color/dark_garnet</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/horseshoe</item>
+        <item name="colorSecondaryVariant">@color/honeycomb</item>
+        <item name="colorOnSecondary">@color/grass</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

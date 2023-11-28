@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Accent Colors -->
+    <color name="rose">#CC2E40</color>
+    <color name="atlantic">#466A9F</color>
+    <color name="congaree">#1F414D</color>
+    <color name="horseshoe">#65780B</color>
+    <color name="grass">#CED318</color>
+    <color name="honeycomb">#A49137</color>
+
+    <!-- Special Use Colors -->
+    <color name="dark_garnet">#570008</color>
+    <color name="azalea">#844247</color>
+</resources>
