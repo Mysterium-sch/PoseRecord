@@ -30,12 +30,13 @@ def find_first_close_imu_timestamp(img_timestamp, imu_data, limit):
             return imu_index, imu_timestamp, time_diff
     return None, None, None
 
-def imu_to_rosimu(timestamp_nsecs, linear, angular, frame_id='map'):
+def imu_to_rosimu(timestamp_nsecs, linear, angular, seq, frame_id='map'):
     timestamp_nsecs = int(row['timestamp'])
     timestamp = rospy.Time(secs=timestamp_nsecs//int(1e9), nsecs=timestamp_nsecs%int(1e9))
     rosimu = Imu()
     rosimu.header.stamp = timestamp
     rosimu.header.frame_id = frame_id
+    rosimu.header.seq = seq
     rosimu.linear_acceleration.x = linear[0]
     rosimu.linear_acceleration.y = linear[1]
     rosimu.linear_acceleration.z = linear[2]
@@ -84,6 +85,7 @@ print(f"Time difference: {time_diff} nanoseconds")
 
 imu_starting_index = 800
 img_starting_index = 0
+seq = 0
 
 img_topic = "/cam0/image_raw"
 bag_path = './data.bag'
@@ -91,7 +93,8 @@ bag_path = './data.bag'
 try:
     bag = rosbag.Bag(bag_path, 'w', compression='lz4')
     for index, row in imu_data.iterrows():
-        rosimu, timestamp = imu_to_rosimu(row['timestamp'], [row['ax'], row['ay'], row['az']], [row['gx'], row['gy'], row['gz']], 'map')
+        rosimu, timestamp = imu_to_rosimu(row['timestamp'], [row['ax'], row['ay'], row['az']], [row['gx'], row['gy'], row['gz']], 'map', seq)
+        seq += 1
         bag.write('/arcore/imu', rosimu, timestamp)
 
     for index, row in pose_data.iterrows():
