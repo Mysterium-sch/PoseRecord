@@ -36,7 +36,7 @@ def imu_to_rosimu(timestamp_nsecs, linear, angular, seq, frame_id='map'):
     rosimu = Imu()
     rosimu.header.stamp = timestamp
     rosimu.header.frame_id = frame_id
-    rosimu.header.seq = seq
+    rosimu.header.seq = int(seq)
     rosimu.linear_acceleration.x = linear[0]
     rosimu.linear_acceleration.y = linear[1]
     rosimu.linear_acceleration.z = linear[2]
@@ -93,7 +93,7 @@ bag_path = './data.bag'
 try:
     bag = rosbag.Bag(bag_path, 'w', compression='lz4')
     for index, row in imu_data.iterrows():
-        rosimu, timestamp = imu_to_rosimu(row['timestamp'], [row['ax'], row['ay'], row['az']], [row['gx'], row['gy'], row['gz']], 'map', seq)
+        rosimu, timestamp = imu_to_rosimu(row['timestamp'], [row['ax'], row['ay'], row['az']], [row['gx'], row['gy'], row['gz']], seq, 'map')
         seq += 1
         bag.write('/arcore/imu', rosimu, timestamp)
 
