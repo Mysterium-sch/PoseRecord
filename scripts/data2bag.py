@@ -96,7 +96,7 @@ try:
 
     for index, row in img_data.iterrows():
         image_path = './images/' + row['filename']
-        image = yuv_to_rgb.convert(image_path)
+        image = yuv_to_rgb.convert(image_path, None)
         rosimg, timestamp, resolution = img_to_rosimg(image, row['timestamp'])
         bag.write('/arcore/image_raw', rosimg, timestamp)
         
